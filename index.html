@@ -2,53 +2,49 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tính giai thừa</title>
     <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <script src="js/init.js"></script>
+    <script src="js/bootstrap.js"></script>
     <script src="js/config.js"></script>
-    <script src="js/giaiThua.js"></script>
+    <script src="js/init.js"></script>
+    <script src="js/erc20.js"></script>
+    <script src="js/nft.js"></script>
+    <script src="js/nft_mkt.js"></script>
+    <title>Title</title>
 </head>
 <body>
+<div>
+    <button id="connect" style="display: block">Connect metamask</button>
     <div>
-        <button id="connect" style="display: block">Connect metamask</button>
-        <div>
-    
-            <p id="account" style="display: none"></p>
-            <p id="balanceVal"></p>
-            <p id="balanceBNBVal"></p>
-    
-    
-        </div>
+
+        <p id="account" style="display: none"></p>
+        <p id="balanceVal"></p>
+        <p id="balanceBNBVal"></p>
+
+
     </div>
-    <div>
-        <form>
-            <label for="message">Message:</label>
-            <input type="text" id="message" name="message"><br><br>
-            <label for="nonce">Nonce:</label>
-            <input type="text" id="nonce" name="nonce"><br><br>
-        </form>
-        <button id="sign">Sign</button>
-        <p id="msg"></p>
-    </div>
-    
-    
-    <div>
-        <h4> Message: </h4>
-        <p id="message_signed">
-        <h4> Signature: </h4>
-        <p id="signature"></p>
-    </div>
-    <button id="openBox" onclick="show()">OpenBox</button>
-    <div style="display: none">
-        <h2>OKOKOKOKOKOKOKKOK</h2>
-    </div>
-</body>
+</div>
+<div>
+    <form>
+        <label for="message">Message:</label>
+        <input type="text" id="message" name="message"><br><br>
+        <label for="nonce">Nonce:</label>
+        <input type="text" id="nonce" name="nonce"><br><br>
+    </form>
+    <button id="sign">Sign</button>
+    <p id="msg"></p>
+</div>
+
+
+<div>
+    <h4> Message: </h4>
+    <p id="message_signed">
+    <h4> Signature: </h4>
+    <p id="signature"></p>
+</div>
+<button id="openBox">OpenBox</button>
+
 <script type="application/javascript">
-    function show(){
-        let x = document.getElementById("openBox");
-        x.style.display = "block";
-    }
     if (typeof window.ethereum !== 'undefined') {
         console.log('MetaMask is installed!');
     }
@@ -119,9 +115,9 @@
             x.style.display = "none";
 
         }
-        await getBalance();
-        await getBalanceToken('')
-        await AddTokenIntoMetamask()
+        // await getBalance();
+        // await getBalanceToken('')
+        // await AddTokenIntoMetamask()
 
     }
 
@@ -220,4 +216,5 @@
     document.getElementById("balance").addEventListener("click", getBalance);
 
 </script>
+</body>
 </html>
