@@ -3,6 +3,10 @@ function getContractInstance (abi, address) {
     return contract;
 }
 
+async function GiaiThua (instance, number) {
+    return await instance.methods.isGiaiThua(number).call();
+}
+
 async function getName (instance) {
     return await instance.methods.name().call();
 }

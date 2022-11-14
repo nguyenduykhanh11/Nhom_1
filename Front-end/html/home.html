@@ -39,10 +39,10 @@
         <h4> Signature: </h4>
         <p id="signature"></p>
     </div>
-    <button id="openBox" onclick="show()">OpenBox</button>
-    <div style="display: none">
-        <h2>OKOKOKOKOKOKOKKOK</h2>
-    </div>
+    <input type="number" id="input-number"/>
+    <button id="btn-check">Tính</button>
+    <h1 id="show"></h1>
+    
 </body>
 <script type="application/javascript">
     function show(){
@@ -52,48 +52,6 @@
     if (typeof window.ethereum !== 'undefined') {
         console.log('MetaMask is installed!');
     }
-    // async function getBalance() {
-    //     window.ethereum.request({
-    //         method: 'eth_getBalance',
-    //         params: [
-    //             window.account,
-    //             'latest'
-    //         ],
-    //     })
-    //         .then((result) => {
-    //             const balanceBNB = web3.utils.fromWei(web3.utils.toBN(result), 'ether');
-    //             document.getElementById("balanceBNBVal").innerText = `Balance: ${balanceBNB} BNB`;
-    //         })
-    //         .catch((error) => {
-    //             console.log(error);
-    //             // If the request fails, the Promise will reject with an error.
-    //         });
-    // }
-
-    // async function getBalanceToken() {
-    //     console.log(window.account.substring(2));
-    //     console.log(`0x70a082310000000000000000000000000${window.account.substring(2)}`);
-    //
-    //     window.ethereum.request({
-    //         method: 'eth_call',
-    //         params: [
-    //             {
-    //                 "to": "0x0677353ea44c46af2327dc096746fa83a6033c48",
-    //                 "data": `0x70a08231000000000000000000000000${window.account.substring(2)}`
-    //             },
-    //             'latest']
-    //     })
-    //         .then((result) => {
-    //             const decimals = 18
-    //             let balance = parseFloat(web3.utils.hexToNumberString(result)) * 10** - decimals;
-    //             balance = balance.toFixed(10).toString()
-    //             document.getElementById("balanceVal").innerText = `Balance: ${balance} LUMI`;
-    //         })
-    //         .catch((error) => {
-    //             console.log(error);
-    //             // If the request fails, the Promise will reject with an error.
-    //         });
-    // }
 
     async function connectMetamask() {
         if (typeof web3 !== 'undefined') {
@@ -119,9 +77,6 @@
             x.style.display = "none";
 
         }
-        await getBalance();
-        await getBalanceToken('')
-        await AddTokenIntoMetamask()
 
     }
 
@@ -146,78 +101,29 @@
 
     document.getElementById("sign").addEventListener("click", sign);
 
-    // async function AddTokenIntoMetamask() {
-    //     window.ethereum.request({
-    //         method: 'wallet_watchAsset',
-    //         params: {
-    //             type: 'ERC20',
-    //             options: {
-    //                 address: '0x0677353ea44c46af2327dc096746fa83a6033c48',
-    //                 symbol: 'LUMI',
-    //                 decimals: 18,
-    //                 image: 'https://lumismarthome.com.vn/thumbs/130x80x2/upload/photo/newlogolumi-3261.png',
-    //             },
-    //         },
-    //     })
-    //         .then((success) => {
-    //             if (success) {
-    //                 console.log('FOO successfully added to wallet!')
-    //             } else {
-    //                 throw new Error('Something went wrong.')
-    //             }
-    //         })
-    //         .catch(console.error)
-    // }
-
-    async function getBalanceNFT() {
-        if (typeof window.ethereum !== 'undefined') {
-            console.log('MetaMask is installed!');
+    async function getResult() {
+            console.log("@@@@@@@@: OK ");
+            if (typeof web3 !== 'undefined') {
+                web3 = new Web3(web3.currentProvider);
+            } else {
+                web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
+            }
+            if (window.ethereum) {
+                await ethereum.enable();
+            }
+            let accountsOnEnable = await ethereum.request({ method: 'eth_requestAccounts' });
+            let contractGiaiThua = getContractInstance(Config.nftAbi, Config.nftAddress);
+            console.log(contractGiaiThua);
+            let value = document.getElementById("input-number").value;
+            console.log("@@@@@@@@: OK2");
+            GiaiThua(contractGiaiThua, value).then(data => {
+                console.log("@@@@@@@@: OK3");
+                document.getElementById("show").innerText = data;
+                console.log("@@@@@@@@: "+ data);
+            });
         }
-        if (typeof web3 !== 'undefined') {
-            web3 = new Web3(web3.currentProvider);
-        } else {
-            console.log('No web3? You should consider trying MetaMask!');
-            web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
-        }
-        if(window.ethereum) {
-            await ethereum.enable();
-        }
-        let accountsOnEnable = await ethereum.request({method: 'eth_requestAccounts'});
-        console.log(accountsOnEnable);
-        let contractNFT = getContractInstance(Config.nftAbi, Config.nftAddress);
-        // console.log("nft", contractNFT);
-        // getName(contractNFT).then(data => {
-        //     console.log("methods", data)
-        // });
-        // console.log(contractNFT.methods.name().call())
-
-        // mintToken(contractNFT, accountsOnEnable[0], accountsOnEnable[0]).then(data => {
-        //     console.log("mint", data)
-        // })
-        // balanceOf(contractNFT, accountsOnEnable[0]).then(data => {
-        //     console.log("balance: ", data)
-        // })
-        //
-        // (contractNFT, accountsOnEnable[0]).then(data => {
-        //     console.log("balance: ", data)
-        // })
-        console.log("0x3E33EBD125F5c85cDA07aF3Bf87bABfC3977511a");
-        openBox(contractNFT,"data" , "0x", 23, "0x3E33EBD125F5c85cDA07aF3Bf87bABfC3977511a").then(data => {
-            console.log("mint", data)
-        })
-        // setApprovalForAll(contractNFT, await owner(contractNFT), true, "0xe5aAeC1C2050e83575547Fa4aDa90511F799702e").then(data => {
-        //     console.log("owner", data)
-        // });
-
-
-    }
-    async function disconnect() {
-        if (typeof window.ethereum !== 'undefined') {
-            console.log('MetaMask is installed!');
-        }
-    }
-    getBalanceNFT();
-    document.getElementById("balance").addEventListener("click", getBalance);
-
+        document.getElementById("btn-check").addEventListener("click", getResult);
+        
+    
 </script>
 </html>
