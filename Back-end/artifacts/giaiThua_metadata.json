@@ -1,0 +1,65 @@
+{
+	"compiler": {
+		"version": "0.8.17+commit.8df45f5f"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "n",
+						"type": "uint256"
+					}
+				],
+				"name": "getGiaiThua",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"giai_thua.sol": "giaiThua"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"giai_thua.sol": {
+			"keccak256": "0xb55deed35702d032cb84dd9cccff92673dcd9a2bb005e1a285faa9b65763df1b",
+			"license": "GPL-3.0",
+			"urls": [
+				"bzz-raw://16e9b68a3c9b9d527a04587ca3d84e5c99b6e8a867e0ae8841790be04bf0ba6e",
+				"dweb:/ipfs/QmY7isizUqEJ8V3c8PX5j9xwSDujzx9N1YexBPuDdh8WL9"
+			]
+		}
+	},
+	"version": 1
+}
