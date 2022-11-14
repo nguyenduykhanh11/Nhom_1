@@ -13,7 +13,7 @@
 						"type": "uint256"
 					}
 				],
-				"name": "isGiaiThua",
+				"name": "getGiaiThua",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -53,11 +53,11 @@
 	},
 	"sources": {
 		"giai_thua.sol": {
-			"keccak256": "0xd04ab18d746aaf8446a31a26478de0b87b1bc7f1dd0d55033d70b84e2c4f78bb",
+			"keccak256": "0xb55deed35702d032cb84dd9cccff92673dcd9a2bb005e1a285faa9b65763df1b",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://01f43ef5bc494811977c756847aa04fa10a7d95099527ec5c26dc74d09ee0875",
-				"dweb:/ipfs/QmVVTD6aiXP6Gwcwe8XfGFCELoxV5eKEhu3CKbUbycb3ww"
+				"bzz-raw://16e9b68a3c9b9d527a04587ca3d84e5c99b6e8a867e0ae8841790be04bf0ba6e",
+				"dweb:/ipfs/QmY7isizUqEJ8V3c8PX5j9xwSDujzx9N1YexBPuDdh8WL9"
 			]
 		}
 	},

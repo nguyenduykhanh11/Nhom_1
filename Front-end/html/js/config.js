@@ -1,6 +1,6 @@
 const Config = {
-    nftAddress: "0x7b5Bc18B12c23974Cd4bA056a416a44e1a78a487",
-    nftAbi: [
+    GiaiThuaAddress: "0xCe02A1a3F73191919b3387593D263A133a7b40e2",
+    GiaiThuaAbi: [
         
             {
 				"inputs": [
@@ -10,7 +10,7 @@ const Config = {
 						"type": "uint256"
 					}
 				],
-				"name": "isGiaiThua",
+				"name": "getGiaiThua",
 				"outputs": [
 					{
 						"internalType": "uint256",
