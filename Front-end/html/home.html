@@ -8,47 +8,78 @@
     <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
     <script src="js/config.js"></script>
     <script src="js/giaiThua.js"></script>
+    <style>
+                /* button */
+        button {
+        z-index: 1;
+        position: relative;
+        font-size: inherit;
+        font-family: inherit;
+        color: white;
+        padding: 0.5em 1em;
+        outline: none;
+        border: none;
+        border-radius: 5px;
+        background-color: hsl(357, 100%, 65%);
+        }
+
+        button:hover {
+        cursor: pointer;
+        }
+
+        button::before {
+        content: '';
+        z-index: -1;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border: 4px solid hsl(357, 100%, 65%);
+        transform-origin: center;
+        transform: scale(1);
+        }
+
+        button:hover::before {
+        transition: all 0.75s ease-in-out;
+        transform-origin: center;
+        transform: scale(1.75);
+        opacity: 0;
+        }
+    </style>
 </head>
 <body>
     <div>
-        <button id="connect" style="display: block">Connect metamask</button>
-        <div>
-    
+        <button id="connect" style="display: block; margin-left: 85%; margin-top: 50px;">Connect metamask</button>
+        <div>    
             <p id="account" style="display: none"></p>
             <p id="balanceVal"></p>
-            <p id="balanceBNBVal"></p>
-    
-    
+            <p id="balanceBNBVal"></p>  
         </div>
     </div>
-    <div>
-        <form>
-            <label for="message">Message:</label>
-            <input type="text" id="message" name="message"><br><br>
-            <label for="nonce">Nonce:</label>
-            <input type="text" id="nonce" name="nonce"><br><br>
-        </form>
-        <button id="sign">Sign</button>
-        <p id="msg"></p>
-    </div>
     
     
-    <div>
-        <h4> Message: </h4>
-        <p id="message_signed">
-        <h4> Signature: </h4>
-        <p id="signature"></p>
+   <div style="text-align: center;">
+    <h1>Tính Giai Thừa</h1>
+    <span style="font-weight: bold; font-size:25px;">N = </span>
+    <input style="width: 350px; height: 40px; font-size:20px; border-radius: 8px;" type="number" placeholder="Nhập số giai thừa*" id="input-number"/><br>
+    <button style="margin-top: 20px; border-radius: 5px;" id="btn-check">Kết quả</button><br>
+    <h1 style="margin-top: 20px; color: blue;"id="show">....</h1>
+    <div class="text">
+        <h2>Về phép toán tính giai thừa</h2>
+        <i>Cho n là một số tự nhiên dương, "n giai thừa", ký hiệu n! là tích của n số tự nhiên dương đầu tiên:</i><br>
+        <i>n! = 1x2x3x...x n</i><br>
+        <i>Ví dụ: 4! = 1.2.3.4 = 24</i><br>
+        <i>Đặc biệt, với n = 0, người ta quy ước 0! = 1.</i><br>
+        <i>Giai thừa của N chính là số các hoán vị của một tập hợp có N phần tử.</i>
+        
     </div>
-    <input type="number" id="input-number"/>
-    <button id="btn-check">Tính</button>
-    <h1 id="show"></h1>
+    
+</div>
+   </div>
     
 </body>
 <script type="application/javascript">
-    function show(){
-        let x = document.getElementById("openBox");
-        x.style.display = "block";
-    }
     if (typeof window.ethereum !== 'undefined') {
         console.log('MetaMask is installed!');
     }
@@ -82,27 +113,7 @@
 
     document.getElementById("connect").addEventListener("click", connectMetamask);
 
-
-    async function sign() {
-        let message = document.getElementById("message").value;
-        let nonce = document.getElementById("nonce").value;
-        let msg = message + ":" + nonce;
-        msg = window.web3.utils.sha3(msg);
-        console.log("message", msg);
-        document.getElementById("message_signed").innerText = msg;
-        let signature = window.web3.eth.personal.sign(msg, window.account).then(data => {
-            console.log("signture", data)
-
-            var div = document.getElementById('signature');
-
-            div.innerHTML += data;
-        });
-    }
-
-    document.getElementById("sign").addEventListener("click", sign);
-
     async function getResult() {
-            console.log("@@@@@@@@: OK ");
             if (typeof web3 !== 'undefined') {
                 web3 = new Web3(web3.currentProvider);
             } else {
@@ -112,18 +123,14 @@
                 await ethereum.enable();
             }
             let accountsOnEnable = await ethereum.request({ method: 'eth_requestAccounts' });
-            let contractGiaiThua = getContractInstance(Config.nftAbi, Config.nftAddress);
+            let contractGiaiThua = getContractInstance(Config.GiaiThuaAbi, Config.GiaiThuaAddress);
             console.log(contractGiaiThua);
             let value = document.getElementById("input-number").value;
-            console.log("@@@@@@@@: OK2");
             GiaiThua(contractGiaiThua, value).then(data => {
-                console.log("@@@@@@@@: OK3");
                 document.getElementById("show").innerText = data;
-                console.log("@@@@@@@@: "+ data);
             });
         }
         document.getElementById("btn-check").addEventListener("click", getResult);
-        
-    
+            
 </script>
 </html>
