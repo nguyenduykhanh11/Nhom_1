@@ -1,5 +1,5 @@
 const Config = {
-    nftAddress: "0x5B38Da6a701c568545dCfcB03FcB875f56beddC4",
+    nftAddress: "0x7b5Bc18B12c23974Cd4bA056a416a44e1a78a487",
     nftAbi: [
         
             {
